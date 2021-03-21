@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <inttypes.h>
 
-sf::Color get_random_color();
+//sf::Color get_random_color();
 float get_rand_float(); 
 double get_rand_double();
 
