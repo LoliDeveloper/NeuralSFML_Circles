@@ -1,5 +1,5 @@
 #pragma once
-#include "Neuron.cpp"
+#include "Neurons.cpp"
 #define _USE_MATH_DEFINES
 #include <math.h> 
 #include <chrono>
@@ -105,7 +105,9 @@ class NeuralMind
 public:
 	int widthHidden;
 	int countOutput;
-
+	NeuralMind(const int& widthHiddenNeurons, const int& neurons_, const int& outputNeurons_);
+	~NeuralMind();
+	NeuralMind& operator = (const NeuralMind& newMind);
 	EnterNeuron* enterNeurons;
 	NeuralhiddenLayer* hiddenLayers;
 	OutputNeuron* outputNeurons;
@@ -119,27 +121,7 @@ public:
 		}
 	}
 
-	NeuralMind(const int& widthHiddenNeurons, const int& neurons_, const int& outputNeurons_)
-	{
-		countOutput = outputNeurons_;
-		widthHidden = widthHiddenNeurons;
-		enterNeurons = new EnterNeuron[ENTER_NEURONS]();
-		hiddenLayers = new NeuralhiddenLayer[widthHiddenNeurons]();
-
-		if (widthHiddenNeurons > 0) { hiddenLayers[0] = NeuralhiddenLayer(neurons_, ENTER_NEURONS); }
-
-		for (int i = 1; i < widthHiddenNeurons; ++i)
-		{
-			hiddenLayers[i] = NeuralhiddenLayer(neurons_);
-		}
-
-		outputNeurons = new OutputNeuron[outputNeurons_]();
-		for (int i = 0; i < outputNeurons_; ++i)
-		{
-			outputNeurons[i] = OutputNeuron(hiddenLayers[widthHidden - 1].neuronCount);
-
-		}
-	}
+	
 	int CalculateDecision(const double& xPos, const double& yPos, const double& widthWindow, const double& heightWindow, const double& speed, const double& angle)
 	{
 		enterNeurons[0].value = (double)xPos / (double)widthWindow;
@@ -150,12 +132,7 @@ public:
 		enterNeurons[5].value = (double)fmod(angle, 2 * M_PI) / (2 * M_PI);
 		return Calculate();
 	}
-	~NeuralMind()
-	{
-		delete[] enterNeurons;
-		delete[] hiddenLayers;
-		delete[] outputNeurons;
-	}
+	
 
 	NeuralMind& operator = (const NeuralMind& newMind)
 	{
@@ -165,3 +142,31 @@ public:
 	}
 };
 
+NeuralMind::NeuralMind(const int& widthHiddenNeurons, const int& neurons_, const int& outputNeurons_)
+{
+	countOutput = outputNeurons_;
+	widthHidden = widthHiddenNeurons;
+	enterNeurons = new EnterNeuron[ENTER_NEURONS]();
+	hiddenLayers = new NeuralhiddenLayer[widthHiddenNeurons]();
+
+	if (widthHiddenNeurons > 0) { hiddenLayers[0] = NeuralhiddenLayer(neurons_, ENTER_NEURONS); }
+
+	for (int i = 1; i < widthHiddenNeurons; ++i)
+	{
+		hiddenLayers[i] = NeuralhiddenLayer(neurons_);
+	}
+
+	outputNeurons = new OutputNeuron[outputNeurons_]();
+	for (int i = 0; i < outputNeurons_; ++i)
+	{
+		outputNeurons[i] = OutputNeuron(hiddenLayers[widthHidden - 1].neuronCount);
+
+	}
+}
+
+NeuralMind::~NeuralMind()
+{
+	delete[] enterNeurons;
+	delete[] hiddenLayers;
+	delete[] outputNeurons;
+}
