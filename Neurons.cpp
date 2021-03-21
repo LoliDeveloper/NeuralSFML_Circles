@@ -3,20 +3,20 @@
 
 
 
-class MyClass
+class EnterNeuron
 {
 public:
-	MyClass();
-	~MyClass();
-
+	EnterNeuron();
+	~EnterNeuron();
+	double value;
 private:
 
 };
 
-MyClass::MyClass()
+EnterNeuron::EnterNeuron()
 {
 }
 
-MyClass::~MyClass()
+EnterNeuron::~EnterNeuron()
 {
 }
