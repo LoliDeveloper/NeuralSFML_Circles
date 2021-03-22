@@ -1,17 +1,5 @@
 #pragma once
-
-
-
-
-class EnterNeuron
-{
-public:
-	double value = 0;
-	EnterNeuron();
-	~EnterNeuron();
-private:
-
-};
+#include "EnterNeuron.h"
 
 EnterNeuron::EnterNeuron()
 {

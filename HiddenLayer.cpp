@@ -1,5 +1,4 @@
-#pragma once
-#include "HiddenNeuron.cpp"
+#include "HiddenNeuron.h"
 
 class HiddenLayer
 {

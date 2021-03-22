@@ -1,7 +1,6 @@
-#pragma once
-#include "MyFunctions.cpp"
-#include "HiddenNeuron.cpp"
-#include "EnterNeuron.cpp"
+#include "MyFunctions.h"
+#include "HiddenNeuron.h"
+#include "EnterNeuron.h"
 
 class OutputNeuron : HiddenNeuron
 {

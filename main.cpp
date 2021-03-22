@@ -1,11 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Circle.cpp"
-#include "MyFunctions.cpp"
+#include "Circle.h"
 
 int main()
 {
-	//Circle circle = Circle();
+	Circle circle = Circle();
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
 
 	while (window.isOpen())
@@ -18,7 +17,7 @@ int main()
 		}
 
 		window.clear();
-		//window.draw(/*circle.Shape*/);
+		window.draw(circle.Shape);
 		window.display();
 	}
 
