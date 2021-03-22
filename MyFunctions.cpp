@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <math.h> 
 #include <SFML/Graphics.hpp>
 #include <inttypes.h>
 
@@ -22,4 +24,9 @@ float get_rand_float()
 double get_rand_double()
 {
 	return (static_cast<double>(rand())) / RAND_MAX;
+}
+
+double sigmoid(const double oldvalue)
+{
+	return 1 / (1 + pow(M_E, -1 * oldvalue));
 }
