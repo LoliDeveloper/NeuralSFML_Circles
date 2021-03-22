@@ -3,10 +3,8 @@
 #include <math.h> 
 #include <SFML/Graphics.hpp>
 #include <inttypes.h>
+#include "MyFunctions.h"
 
-//sf::Color get_random_color();
-float get_rand_float(); 
-double get_rand_double();
 
 sf::Color get_random_color()
 {

@@ -6,9 +6,9 @@
 class EnterNeuron
 {
 public:
+	double value = 0;
 	EnterNeuron();
 	~EnterNeuron();
-	double value;
 private:
 
 };

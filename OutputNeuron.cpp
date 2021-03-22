@@ -1,15 +1,15 @@
 #pragma once
 #include "MyFunctions.cpp"
+#include "HiddenNeuron.cpp"
 #include "EnterNeuron.cpp"
 
-class OutputNeuron
+class OutputNeuron : HiddenNeuron
 {
 public:
-	double value;
-	double *weights;
-	int weight_count;
-	OutputNeuron();
-	void CalculateWeights(EnterNeuron*);
+	static int indexMax;
+	static double MaxValue;
+	OutputNeuron(); 
+	void CalculateWeights(HiddenNeuron* prevLayerNeurons);
 	~OutputNeuron();
 
 private:
@@ -24,7 +24,7 @@ OutputNeuron::~OutputNeuron()
 {
 }
 
-void OutputNeuron::CalculateWeights(EnterNeuron* prevLayerNeurons)
+void OutputNeuron::CalculateWeights(HiddenNeuron* prevLayerNeurons)
 {
 	double tmpValue = 0.;
 	for (int i = 0; i < weight_count; ++i)

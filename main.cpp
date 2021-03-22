@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Circle.cpp"
+#include "MyFunctions.cpp"
 
 int main()
 {
