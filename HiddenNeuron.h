@@ -7,10 +7,11 @@ public:
 	double value = 0;
 	int weight_count;
 	double *weights;
-	HiddenNeuron();
+	HiddenNeuron(const int weightCount);
 	void CalculateWeights(EnterNeuron*);
 	void CalculateWeights(HiddenNeuron*);
 	~HiddenNeuron();
+	void rndWeights();
 
 private:
 };

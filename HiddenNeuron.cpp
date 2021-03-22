@@ -1,9 +1,12 @@
 #include "EnterNeuron.h"
 #include "MyFunctions.h"
 #include "HiddenNeuron.h"
+#include <random>
 
-HiddenNeuron::HiddenNeuron()
+HiddenNeuron::HiddenNeuron(const int weightCount)
 {
+	weights = new double[weightCount]();
+	rndWeights();
 }
 
 HiddenNeuron::~HiddenNeuron()
@@ -29,4 +32,12 @@ void HiddenNeuron::CalculateWeights(HiddenNeuron* prevLayerNeurons)
 		tmpValue += (prevLayerNeurons[i].value * weights[i]);
 	}
 	value = sigmoid(tmpValue);
+}
+
+void HiddenNeuron::rndWeights()
+{
+	for(int i = 0; i < weight_count; ++i)
+	{
+		weights[i] = (double)rand() / RAND_MAX;
+	}
 }
