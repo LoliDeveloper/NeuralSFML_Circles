@@ -1,15 +1,16 @@
 #pragma once
 #include "EnterNeuron.h"
 
-class HiddenNeuron : EnterNeuron
+class HiddenNeuron : public EnterNeuron
 {
 public:
 	double value = 0;
-	int weight_count;
+	const int weight_count;
 	double *weights;
 	HiddenNeuron(const int weightCount);
 	void CalculateWeights(EnterNeuron*);
 	void CalculateWeights(HiddenNeuron*);
+	HiddenNeuron& operator = (const HiddenNeuron& newValue);
 	~HiddenNeuron();
 	void rndWeights();
 

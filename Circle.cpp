@@ -25,7 +25,7 @@ Circle::~Circle()
 
 void Circle::Update()
 {
-	double input[4] = { (double)Speed / MaxSpeed, fmod(Angle, 2*M_PI), Shape.getPosition.x / widthWindow, Shape.getPosition.y / heightWindow};
+	double input[4] = { (double)Speed / MaxSpeed, fmod(Angle, 2 * M_PI), (double)Shape.getPosition().x / widthWindow, (double)Shape.getPosition().y / heightWindow };
 	int resultDecision = MindShape.CalculateDecision(input);
 	if (resultDecision == 0)
 	{

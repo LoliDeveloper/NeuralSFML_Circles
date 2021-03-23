@@ -3,9 +3,10 @@
 #include "HiddenNeuron.h"
 #include <random>
 
-HiddenNeuron::HiddenNeuron(const int weightCount)
+HiddenNeuron::HiddenNeuron(const int weightCount) :
+	weight_count(weightCount)
 {
-	weights = new double[weightCount]();
+	weights = new double[weight_count]();
 	rndWeights();
 }
 
@@ -40,4 +41,17 @@ void HiddenNeuron::rndWeights()
 	{
 		weights[i] = (double)rand() / RAND_MAX;
 	}
+}
+
+HiddenNeuron& HiddenNeuron::operator = (const HiddenNeuron& newValue)
+{
+	this->value = newValue.value;
+	delete[] this->weights;
+	this->weights = new double[newValue.weight_count]();
+	for (int i = 0; i < newValue.weight_count; ++i)
+	{
+		this->weights[i] = newValue.weights[i];
+	}
+
+	return *this;
 }

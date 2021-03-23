@@ -2,14 +2,12 @@
 #include "HiddenNeuron.h"
 #include "EnterNeuron.h"
 
-class OutputNeuron : HiddenNeuron
+class OutputNeuron : public HiddenNeuron
 {
 public:
-	static int indexMax;
-	static double MaxValue;
-	OutputNeuron(int weightCount);
-	void CalculateWeights(HiddenNeuron *prevLayerNeurons);
-	void CalculateWeights(EnterNeuron *prevLayerNeurons);
+	OutputNeuron(const int& weightCount);
+	void CalculateAllWeights(HiddenNeuron *prevLayerNeurons);
+	void CalculateAllWeights(EnterNeuron *prevLayerNeurons);
 	~OutputNeuron();
 
 private:

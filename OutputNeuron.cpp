@@ -3,17 +3,24 @@
 #include "EnterNeuron.h"
 #include "OutputNeuron.h"
 
-OutputNeuron::OutputNeuron(int weightCount)
+OutputNeuron::OutputNeuron(const int& weightCount):HiddenNeuron(weightCount)
 {
-	weights = new double[weightCount]();
-	rndWeights();
 }
 
 OutputNeuron::~OutputNeuron()
 {
 }
 
-void OutputNeuron::CalculateWeights(HiddenNeuron* prevLayerNeurons)
+void OutputNeuron::CalculateAllWeights(HiddenNeuron* prevLayerNeurons)
+{
+	double tmpValue = 0.;
+	for (int i = 0; i < weight_count; ++i)
+	{
+		tmpValue += (prevLayerNeurons[i].value * weights[i]);
+	}
+	value = sigmoid(tmpValue);
+}
+void OutputNeuron::CalculateAllWeights(EnterNeuron* prevLayerNeurons)
 {
 	double tmpValue = 0.;
 	for (int i = 0; i < weight_count; ++i)

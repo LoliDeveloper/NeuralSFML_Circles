@@ -13,9 +13,9 @@ public:
 
 private:
 	EnterNeuron *EnterNeurons;
-	int EnterNeuronsCount;
+	const int EnterNeuronsCount;
 	HiddenLayer *HiddenLayers;
-	int widthHiddenLayers;
+	const int widthHiddenLayers;
 	OutputNeuron *OutputNeurons;
-	int OutputNeuronsCount;
+	const int OutputNeuronsCount;
 };

@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <inttypes.h>
 #include "MyFunctions.h"
+#include <cstdarg>
 
 
 sf::Color get_random_color()
@@ -29,4 +30,19 @@ double get_rand_double()
 double sigmoid(const double oldvalue)
 {
 	return 1 / (1 + pow(M_E, -1 * oldvalue));
+}
+
+int max(int count, double* A)
+{
+	int max = -1;
+	double maxV = -1.;
+	for (int i = 0; i < count; ++i)
+	{
+		if (A[i] > maxV)
+		{
+			max = i;
+		}
+		--count;
+	}
+	return max;
 }
