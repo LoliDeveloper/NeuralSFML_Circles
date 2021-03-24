@@ -10,7 +10,7 @@ Circle circle = Circle(1.f, 5.f, 1.f);
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(widthWindow, heightWindow), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(Globals::widthWindow, Globals::heightWindow), "SFML works!");
 
 	while (window.isOpen())
 	{

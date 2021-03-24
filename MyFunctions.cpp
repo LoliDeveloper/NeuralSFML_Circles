@@ -31,18 +31,3 @@ double sigmoid(const double oldvalue)
 {
 	return 1 / (1 + pow(M_E, -1 * oldvalue));
 }
-
-int max(int count, double* A)
-{
-	int max = -1;
-	double maxV = -1.;
-	for (int i = 0; i < count; ++i)
-	{
-		if (A[i] > maxV)
-		{
-			max = i;
-		}
-		--count;
-	}
-	return max;
-}

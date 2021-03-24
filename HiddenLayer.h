@@ -1,15 +1,15 @@
 #pragma once
 #include "HiddenNeuron.h"
+#include <vector>
 
 class HiddenLayer
 {
 public:
 	HiddenLayer(int count, int weight_count_);
-	void CalculateAllNeurons(EnterNeuron *values);
-	void CalculateAllNeurons(HiddenNeuron *values);
+	void CalculateAllNeurons(const std::vector<EnterNeuron>& values);
+	void CalculateAllNeurons(const std::vector<HiddenNeuron>& values);
 	~HiddenLayer();
-	HiddenNeuron *HiddenNeurons;
+	std::vector<HiddenNeuron> HiddenNeurons;
 	const int count;
-	HiddenLayer& operator = (const HiddenLayer& newValue);
 private:
 };

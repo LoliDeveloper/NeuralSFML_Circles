@@ -2,7 +2,7 @@
 #include "EnterNeuron.h"
 #include "HiddenLayer.h"
 #include "OutputNeuron.h"
-
+#include <vector>
 
 class NeuralMind
 {
@@ -12,10 +12,11 @@ public:
 	~NeuralMind();
 
 private:
-	EnterNeuron *EnterNeurons;
+	std::vector<EnterNeuron> EnterNeurons;
 	const int EnterNeuronsCount;
-	HiddenLayer *HiddenLayers;
+	std::vector<HiddenLayer> HiddenLayers;
 	const int widthHiddenLayers;
-	OutputNeuron *OutputNeurons;
+	std::vector<OutputNeuron> OutputNeurons;
 	const int OutputNeuronsCount;
+	int CurrentAnswer();
 };

@@ -2,36 +2,37 @@
 #include <math.h> 
 #include "NeuralMind.h"
 #include "MyFunctions.h"
+#include <vector>
 
 
 NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int outputNeuronsCount):
-	OutputNeuronsCount(outputNeuronsCount),
 	EnterNeuronsCount(enterNeurons),
-	widthHiddenLayers(hiddenWidth)
+	widthHiddenLayers(hiddenWidth),
+	OutputNeuronsCount(outputNeuronsCount)
 {
-	EnterNeurons[enterNeurons];
-	HiddenLayers[hiddenWidth];
-	OutputNeurons[outputNeuronsCount];
-	for (int i = 0; i < enterNeurons; ++i)
+	EnterNeurons.reserve(EnterNeuronsCount);
+	HiddenLayers.reserve(widthHiddenLayers);
+	OutputNeurons.reserve(OutputNeuronsCount);
+	for (int i = 0; i < EnterNeuronsCount; ++i)
 	{
-		EnterNeurons[i] = EnterNeuron();
+		EnterNeurons.push_back(EnterNeuron());
 	}
 	if (hiddenWidth > 0)
 	{
-		HiddenLayers[0] = HiddenLayer(hiddenCount, enterNeurons);
+		HiddenLayers.push_back(HiddenLayer(hiddenCount, EnterNeuronsCount));
 		for (int i = 1; i < hiddenWidth; ++i)
 		{
-			HiddenLayers[i] = HiddenLayer(hiddenCount, hiddenCount);
+			HiddenLayers.push_back(HiddenLayer(hiddenCount, hiddenCount));
 		}
 		for (int i = 0; i < outputNeuronsCount; ++i)
 		{
-			OutputNeurons[i] = OutputNeuron(hiddenCount);
+			OutputNeurons.push_back(OutputNeuron(hiddenCount));
 		}
 	}
 	else {
 		for (int i = 0; i < outputNeuronsCount; ++i)
 		{
-			OutputNeurons[i] = OutputNeuron(enterNeurons);
+			OutputNeurons.push_back(OutputNeuron(EnterNeuronsCount));
 		}
 	}
 
@@ -43,7 +44,6 @@ NeuralMind::~NeuralMind()
 
 int NeuralMind::CalculateDecision(double *values)
 {
-	double tmpArr[OutputNeuronsCount];
 	for(int i = 0; i < EnterNeuronsCount; ++i) //SET VALUES TO ENTER NEURONS
 	{
 		EnterNeurons[i].value = values[i];
@@ -66,5 +66,20 @@ int NeuralMind::CalculateDecision(double *values)
 			OutputNeurons[i].CalculateAllWeights(EnterNeurons); // CALCULATE OUTPUT NEURONS
 		}
 	}
-	return maxDoubleArray(OutputNeuronsCount, OutputNeurons->value);
+	return CurrentAnswer();
+}
+
+int NeuralMind::CurrentAnswer()
+{
+	int maxIndex = -1;
+	double maxValue = -20;
+	for (int i = 0; i < OutputNeuronsCount; ++i)
+	{
+		if (OutputNeurons[i].value > maxValue)
+		{
+			maxValue = OutputNeurons[i].value;
+			maxIndex = i;
+		}
+	}
+	return maxIndex;
 }

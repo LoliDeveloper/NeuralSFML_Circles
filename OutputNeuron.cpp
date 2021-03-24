@@ -11,7 +11,7 @@ OutputNeuron::~OutputNeuron()
 {
 }
 
-void OutputNeuron::CalculateAllWeights(HiddenNeuron* prevLayerNeurons)
+void OutputNeuron::CalculateAllWeights(const std::vector<HiddenNeuron>& prevLayerNeurons)
 {
 	double tmpValue = 0.;
 	for (int i = 0; i < weight_count; ++i)
@@ -20,7 +20,7 @@ void OutputNeuron::CalculateAllWeights(HiddenNeuron* prevLayerNeurons)
 	}
 	value = sigmoid(tmpValue);
 }
-void OutputNeuron::CalculateAllWeights(EnterNeuron* prevLayerNeurons)
+void OutputNeuron::CalculateAllWeights(const std::vector<EnterNeuron>& prevLayerNeurons)
 {
 	double tmpValue = 0.;
 	for (int i = 0; i < weight_count; ++i)

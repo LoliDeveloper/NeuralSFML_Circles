@@ -5,10 +5,10 @@
 HiddenLayer::HiddenLayer(const int count_, int weightCount_):
 	count(count_)
 {
-	HiddenNeurons[count];
+	HiddenNeurons.reserve(count);
 	for (int i = 0; i < count; ++i)
 	{
-		HiddenNeurons[i] = HiddenNeuron(weightCount_);
+		HiddenNeurons.push_back(HiddenNeuron(weightCount_));
 		HiddenNeurons[i].rndWeights();
 	}
 }
@@ -17,7 +17,7 @@ HiddenLayer::~HiddenLayer()
 {
 }
 
-void HiddenLayer::CalculateAllNeurons(EnterNeuron *values)
+void HiddenLayer::CalculateAllNeurons(const std::vector<EnterNeuron>& values)
 {
 	for (int i = 0; i < count; ++i)
 	{
@@ -30,7 +30,7 @@ void HiddenLayer::CalculateAllNeurons(EnterNeuron *values)
 	}
 }
 
-void HiddenLayer::CalculateAllNeurons(HiddenNeuron *values)
+void HiddenLayer::CalculateAllNeurons(const std::vector<HiddenNeuron>& values)
 {
 	for (int i = 0; i < count; ++i)
 	{
@@ -40,17 +40,5 @@ void HiddenLayer::CalculateAllNeurons(HiddenNeuron *values)
 			tmpValue += HiddenNeurons[i].weights[j] * values[j].value;
 		}
 		HiddenNeurons[i].value = sigmoid(tmpValue);
-	}
-}
-
-HiddenLayer& HiddenLayer::operator = (const HiddenLayer& newValue)
-{
-	this->count = newValue.count;
-	delete[] this->HiddenNeurons;
-	this->HiddenNeurons[newValue.count];
-	for (int i = 0; i < newValue.count; ++i)
-	{
-		HiddenNeurons[i] = HiddenNeuron(weightCount_);
-		HiddenNeurons[i].rndWeights();
 	}
 }

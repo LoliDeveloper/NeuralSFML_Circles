@@ -17,6 +17,7 @@ Circle::Circle(float speed, float maxspeed, float angle)
 	Angle = angle;
 	Shape = sf::CircleShape(20.f);
 	Shape.setFillColor(get_random_color());
+	RecalculateDirection();
 }
 
 Circle::~Circle()
@@ -25,7 +26,7 @@ Circle::~Circle()
 
 void Circle::Update()
 {
-	double input[4] = { (double)Speed / MaxSpeed, fmod(Angle, 2 * M_PI), (double)Shape.getPosition().x / widthWindow, (double)Shape.getPosition().y / heightWindow };
+	double input[4] = { (double)Speed / MaxSpeed, fmod(Angle, 2 * M_PI), (double)Shape.getPosition().x / Globals::widthWindow, (double)Shape.getPosition().y / Globals::heightWindow };
 	int resultDecision = MindShape.CalculateDecision(input);
 	if (resultDecision == 0)
 	{
@@ -43,4 +44,38 @@ void Circle::Update()
 	{
 		decreaseSpeed();
 	}
+}
+
+void Circle::turnLeft()
+{
+	Angle += 0.05;
+	RecalculateDirection();
+}
+
+void Circle::turnRight()
+{
+	Angle -= 0.05;
+	RecalculateDirection();
+}
+
+void Circle::increaseSpeed()
+{
+	if (abs(Speed) < MaxSpeed) {
+		Speed += 0.05;
+		RecalculateDirection();
+	}
+}
+
+void Circle::decreaseSpeed()
+{
+	if (abs(Speed) < MaxSpeed) {
+		Speed -= 0.05;
+		RecalculateDirection();
+	}
+}
+
+void Circle::RecalculateDirection()
+{
+	Direction.x = cos(Angle) * Speed;
+	Direction.y = sin(Angle) * Speed;
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "NeuralMind.h"
 #include "MyFunctions.h"
 
@@ -12,6 +13,7 @@ public:
 	sf::CircleShape Shape;
 
 private:
+	sf::Vector2f Direction;
 	float Angle;
 	float Speed;
 	float MaxSpeed;
@@ -19,5 +21,6 @@ private:
 	void turnRight();
 	void increaseSpeed();
 	void decreaseSpeed();
-	NeuralMind MindShape = NeuralMind(4, (int)5 * get_rand_float() + 1, (int)35 * get_rand_float() + 1, 4);
+	void RecalculateDirection();
+	NeuralMind MindShape = NeuralMind(4, static_cast<int>(5 * get_rand_float()) + 1, static_cast <int>(35 * get_rand_float() + 1), 4);
 };
