@@ -9,7 +9,7 @@ public:
 	void CalculateAllNeurons(HiddenNeuron *values);
 	~HiddenLayer();
 	HiddenNeuron *HiddenNeurons;
-	int count;
+	const int count;
 	HiddenLayer& operator = (const HiddenLayer& newValue);
 private:
 };
