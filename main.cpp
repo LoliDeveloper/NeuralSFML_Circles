@@ -2,19 +2,26 @@
 #include <iostream>
 #include "Circle.h"
 #include "Globals.h"
+#include <vector>
 
 void Draw(sf::RenderWindow&);
 void Update();
+std::vector<Circle> circles;
 
-Circle circle = Circle(1.f, 5.f, 1.f);
 
 int main()
 {
+	circles.reserve(Globals::circlesCount);
+	for (int i = 0; i < Globals::circlesCount; ++i)
+	{
+		circles.push_back(Circle(get_rand_float() * 15.f, 15.f, 1.f, 20.f));
+	}
 	sf::RenderWindow window(sf::VideoMode(Globals::widthWindow, Globals::heightWindow), "SFML works!");
+	window.setFramerateLimit(60);
 
 	while (window.isOpen())
 	{
-
+		Update();
 		Draw(window);
 	}
 
@@ -31,11 +38,13 @@ void Draw(sf::RenderWindow& window)
 			window.close();
 	}
 	window.clear();
-	window.draw(circle.Shape);
+	for(int i = 0; i < Globals::circlesCount; ++i)
+		circles[i].Draw(window);
 	window.display();
 }
 
 void Update()
 {
-	circle.Update();
+	for (int i = 0; i < Globals::circlesCount; ++i)
+		circles[i].Update();
 }

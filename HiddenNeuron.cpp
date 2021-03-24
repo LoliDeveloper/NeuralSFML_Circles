@@ -12,6 +12,7 @@ HiddenNeuron::HiddenNeuron(const int& weightCount):
 
 HiddenNeuron::~HiddenNeuron()
 {
+	delete[] weights;
 }
 
 
@@ -41,4 +42,20 @@ void HiddenNeuron::rndWeights()
 	{
 		weights[i] = (double)rand() / RAND_MAX;
 	}
+}
+
+
+HiddenNeuron& HiddenNeuron::operator = (const HiddenNeuron& newHiddenNeuron)
+{
+	this->value = newHiddenNeuron.value;
+	this->weight_count = newHiddenNeuron.weight_count;
+	delete[] this->weights;
+
+	this->weights = new double[this->weight_count]();
+	for (int i = 0; i < weight_count; ++i)
+	{
+		this->weights[i] = newHiddenNeuron.weights[i];
+	}
+
+	return *this;
 }

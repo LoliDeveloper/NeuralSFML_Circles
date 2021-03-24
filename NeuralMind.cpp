@@ -17,20 +17,20 @@ NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int o
 	{
 		EnterNeurons.push_back(EnterNeuron());
 	}
-	if (hiddenWidth > 0)
+	if (widthHiddenLayers > 0)
 	{
 		HiddenLayers.push_back(HiddenLayer(hiddenCount, EnterNeuronsCount));
-		for (int i = 1; i < hiddenWidth; ++i)
+		for (int i = 1; i < widthHiddenLayers; ++i)
 		{
 			HiddenLayers.push_back(HiddenLayer(hiddenCount, hiddenCount));
 		}
-		for (int i = 0; i < outputNeuronsCount; ++i)
+		for (int i = 0; i < OutputNeuronsCount; ++i)
 		{
 			OutputNeurons.push_back(OutputNeuron(hiddenCount));
 		}
 	}
 	else {
-		for (int i = 0; i < outputNeuronsCount; ++i)
+		for (int i = 0; i < OutputNeuronsCount; ++i)
 		{
 			OutputNeurons.push_back(OutputNeuron(EnterNeuronsCount));
 		}
@@ -82,4 +82,59 @@ int NeuralMind::CurrentAnswer()
 		}
 	}
 	return maxIndex;
+}
+
+void NeuralMind::RandomMutation()
+{
+	if (widthHiddenLayers > 0)
+	{
+		if (get_rand_double() * 4 < 3)
+		{
+			int randlayer = (get_rand_double() - 0.01) * widthHiddenLayers;
+			int randNeuron = HiddenLayers[randlayer].count * (get_rand_double() - 0.01);
+			HiddenLayers[randlayer].HiddenNeurons[randNeuron].value = get_rand_double();
+		}
+		else {
+			int randNeuron = OutputNeuronsCount * (get_rand_double() - 0.01);
+			OutputNeurons[randNeuron].value = get_rand_double();
+		}
+	}
+	else {
+		int randNeuron = OutputNeuronsCount * (get_rand_double() - 0.01);
+		OutputNeurons[randNeuron].value = get_rand_double();
+	}
+}
+
+NeuralMind& NeuralMind::operator = (const NeuralMind& newNeural)
+{
+
+	EnterNeurons.clear();
+	if (widthHiddenLayers > 0)
+	{
+		for (int i = 0; i < widthHiddenLayers; ++i)
+		{
+			HiddenLayers[i].HiddenNeurons.clear();
+		}
+		HiddenLayers.clear();
+	}
+	OutputNeurons.clear();
+	
+
+	this->EnterNeuronsCount = newNeural.EnterNeuronsCount;
+	this->widthHiddenLayers = newNeural.widthHiddenLayers;
+	this->OutputNeuronsCount = newNeural.OutputNeuronsCount;
+
+	this->EnterNeurons.reserve(EnterNeuronsCount);
+	this->HiddenLayers.reserve(widthHiddenLayers);
+	this->OutputNeurons.reserve(OutputNeuronsCount);
+
+	this->EnterNeurons = newNeural.EnterNeurons;
+	
+	if (widthHiddenLayers > 0)
+	{
+		this->HiddenLayers = newNeural.HiddenLayers;
+	}
+	this->OutputNeurons = newNeural.OutputNeurons;
+
+	return *this;
 }

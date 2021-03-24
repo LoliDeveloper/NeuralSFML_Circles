@@ -29,3 +29,18 @@ void OutputNeuron::CalculateAllWeights(const std::vector<EnterNeuron>& prevLayer
 	}
 	value = sigmoid(tmpValue);
 }
+
+OutputNeuron& OutputNeuron::operator = (const OutputNeuron& newOutputNeuron)
+{
+	this->value = newOutputNeuron.value;
+	this->weight_count = newOutputNeuron.weight_count;
+	delete[] this->weights;
+
+	this->weights = new double[this->weight_count]();
+	for (int i = 0; i < weight_count; ++i)
+	{
+		this->weights[i] = newOutputNeuron.weights[i];
+	}
+
+	return *this;
+}

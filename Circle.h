@@ -2,18 +2,23 @@
 #include <SFML/Graphics.hpp>
 #include "NeuralMind.h"
 #include "MyFunctions.h"
+#include <chrono>
 
 class Circle
 {
 public:
-	Circle(float speed, float maxSpeed, float angle);
+	Circle(float speed, float maxSpeed, float angle, float radius);
 	void Die();
+	void Draw(sf::RenderWindow& window);
 	void Update();
 	~Circle();
 	sf::CircleShape Shape;
 
 private:
 	sf::Vector2f Direction;
+	std::chrono::system_clock::time_point start;
+	double liveTime;
+	float Radius;
 	float Angle;
 	float Speed;
 	float MaxSpeed;
@@ -22,5 +27,5 @@ private:
 	void increaseSpeed();
 	void decreaseSpeed();
 	void RecalculateDirection();
-	NeuralMind MindShape = NeuralMind(4, static_cast<int>(5 * get_rand_float()) + 1, static_cast <int>(35 * get_rand_float() + 1), 4);
+	NeuralMind MindShape = NeuralMind(4, static_cast<int>(10 * get_rand_float()) + 1, static_cast <int>(10 * get_rand_float() + 1), 4);
 };

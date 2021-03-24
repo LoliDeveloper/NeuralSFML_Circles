@@ -42,3 +42,13 @@ void HiddenLayer::CalculateAllNeurons(const std::vector<HiddenNeuron>& values)
 		HiddenNeurons[i].value = sigmoid(tmpValue);
 	}
 }
+
+HiddenLayer& HiddenLayer::operator = (const HiddenLayer& newHiddenLayer)
+{
+	this->HiddenNeurons.clear();
+
+	this->count = newHiddenLayer.count;
+	this->HiddenNeurons.reserve(count);
+	this->HiddenNeurons = newHiddenLayer.HiddenNeurons;
+	return *this;
+}

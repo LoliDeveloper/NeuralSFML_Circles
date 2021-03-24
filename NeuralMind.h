@@ -10,13 +10,15 @@ public:
 	NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int outputNeuronsCount);
 	int CalculateDecision(double *EnterValues);
 	~NeuralMind();
+	void RandomMutation();
+	NeuralMind& operator = (const NeuralMind& newNeural);
 
 private:
 	std::vector<EnterNeuron> EnterNeurons;
-	const int EnterNeuronsCount;
+	int EnterNeuronsCount;
 	std::vector<HiddenLayer> HiddenLayers;
-	const int widthHiddenLayers;
+	int widthHiddenLayers;
 	std::vector<OutputNeuron> OutputNeurons;
-	const int OutputNeuronsCount;
+	int OutputNeuronsCount;
 	int CurrentAnswer();
 };
