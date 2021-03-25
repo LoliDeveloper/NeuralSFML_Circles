@@ -45,10 +45,13 @@ void HiddenLayer::CalculateAllNeurons(const std::vector<HiddenNeuron>& values)
 
 HiddenLayer& HiddenLayer::operator = (const HiddenLayer& newHiddenLayer)
 {
-	this->HiddenNeurons.clear();
-
+	this->HiddenNeurons.reserve(newHiddenLayer.count*2);
+	HiddenNeurons.clear();
+	for (int i = 0; i < newHiddenLayer.count; ++i)
+	{
+		HiddenNeurons.push_back(newHiddenLayer.HiddenNeurons[i]);
+	}
+	
 	this->count = newHiddenLayer.count;
-	this->HiddenNeurons.reserve(count);
-	this->HiddenNeurons = newHiddenLayer.HiddenNeurons;
 	return *this;
 }

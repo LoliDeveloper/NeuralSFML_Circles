@@ -27,6 +27,12 @@ double get_rand_double()
 	return (static_cast<double>(rand())) / RAND_MAX;
 }
 
+
+double get_rand_double(int value)
+{
+	return get_rand_double() * value;
+}
+
 double sigmoid(const double oldvalue)
 {
 	return 1 / (1 + pow(M_E, -1 * oldvalue));

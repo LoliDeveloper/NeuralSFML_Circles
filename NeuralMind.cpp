@@ -3,12 +3,14 @@
 #include "NeuralMind.h"
 #include "MyFunctions.h"
 #include <vector>
+#include <iostream>
 
 
 NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int outputNeuronsCount):
 	EnterNeuronsCount(enterNeurons),
 	widthHiddenLayers(hiddenWidth),
-	OutputNeuronsCount(outputNeuronsCount)
+	OutputNeuronsCount(outputNeuronsCount),
+	HiddenCount(hiddenCount)
 {
 	EnterNeurons.reserve(EnterNeuronsCount);
 	HiddenLayers.reserve(widthHiddenLayers);
@@ -108,7 +110,7 @@ void NeuralMind::RandomMutation()
 NeuralMind& NeuralMind::operator = (const NeuralMind& newNeural)
 {
 
-	EnterNeurons.clear();
+	/*EnterNeurons.clear();
 	if (widthHiddenLayers > 0)
 	{
 		for (int i = 0; i < widthHiddenLayers; ++i)
@@ -117,7 +119,7 @@ NeuralMind& NeuralMind::operator = (const NeuralMind& newNeural)
 		}
 		HiddenLayers.clear();
 	}
-	OutputNeurons.clear();
+	OutputNeurons.clear();*/
 	
 
 	this->EnterNeuronsCount = newNeural.EnterNeuronsCount;
@@ -128,13 +130,47 @@ NeuralMind& NeuralMind::operator = (const NeuralMind& newNeural)
 	this->HiddenLayers.reserve(widthHiddenLayers);
 	this->OutputNeurons.reserve(OutputNeuronsCount);
 
-	this->EnterNeurons = newNeural.EnterNeurons;
+	this->EnterNeurons.clear();
+	this->HiddenLayers.clear();
+	this->OutputNeurons.clear();
+
+	for (int i = 0; i < EnterNeuronsCount; ++i)
+	{
+		this->EnterNeurons.push_back(newNeural.EnterNeurons[i]);
+	}
 	
 	if (widthHiddenLayers > 0)
 	{
-		this->HiddenLayers = newNeural.HiddenLayers;
+		for (int i = 0; i < widthHiddenLayers; ++i)
+		{
+			this->HiddenLayers.push_back(newNeural.HiddenLayers[i]);
+		}
 	}
-	this->OutputNeurons = newNeural.OutputNeurons;
+	for (int i = 0; i < OutputNeuronsCount; ++i)
+	{
+		this->OutputNeurons.push_back(newNeural.OutputNeurons[i]);
+	}
 
 	return *this;
+}
+
+void NeuralMind::RecalculateWeights(int rightAnswer)
+{
+
+}
+
+double NeuralMind::getError(int rightAnswer)
+{
+	double summ = 0;
+	for (int i = 0; i < OutputNeuronsCount; ++i)
+	{
+		if (i != rightAnswer)
+		{
+			summ += pow((OutputNeurons[i].value - 0),2);
+		}
+		else {
+			summ += pow((OutputNeurons[i].value - 1), 2);
+		}
+	}
+	return summ;
 }

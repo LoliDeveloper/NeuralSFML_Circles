@@ -4,7 +4,7 @@ class EnterNeuron
 {
 public:
 	double value = 0;
-	EnterNeuron();
+	explicit EnterNeuron();
 	~EnterNeuron();
 private:
 

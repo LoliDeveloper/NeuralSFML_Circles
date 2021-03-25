@@ -7,10 +7,11 @@
 class Circle
 {
 public:
-	Circle(float speed, float maxSpeed, float angle, float radius);
+	explicit Circle(float speed, float maxSpeed, float angle, float radius);
 	void Die();
 	void Draw(sf::RenderWindow& window);
 	void Update();
+	void set_random_position();
 	~Circle();
 	sf::CircleShape Shape;
 

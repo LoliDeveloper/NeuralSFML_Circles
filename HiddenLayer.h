@@ -5,7 +5,7 @@
 class HiddenLayer
 {
 public:
-	HiddenLayer(int count, int weight_count_);
+	explicit HiddenLayer(int count, int weight_count_);
 	void CalculateAllNeurons(const std::vector<EnterNeuron>& values);
 	void CalculateAllNeurons(const std::vector<HiddenNeuron>& values);
 	HiddenLayer& operator = (const HiddenLayer& newOutputNeuron);
