@@ -14,7 +14,7 @@ public:
 	void set_random_position();
 	~Circle();
 	sf::CircleShape Shape;	
-	NeuralMind MindShape;// = NeuralMind(4, static_cast<int>(10 * get_rand_float()) + 1, static_cast <int>(10 * get_rand_float() + 1), 4);
+	NeuralMind MindShape = NeuralMind(4, 4, 13, 4);
 
 private:
 	sf::Vector2f Direction;

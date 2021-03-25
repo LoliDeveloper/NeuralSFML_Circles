@@ -9,7 +9,8 @@
 NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int outputNeuronsCount):
 	EnterNeuronsCount(enterNeurons),
 	widthHiddenLayers(hiddenWidth),
-	OutputNeuronsCount(outputNeuronsCount)
+	OutputNeuronsCount(outputNeuronsCount),
+	HiddenNeuronCount(hiddenCount)
 {
 	EnterNeurons.reserve(EnterNeuronsCount);
 	HiddenLayers.reserve(widthHiddenLayers);
@@ -126,6 +127,7 @@ NeuralMind& NeuralMind::operator = (const NeuralMind& newNeural)
 	this->EnterNeuronsCount = newNeural.EnterNeuronsCount;
 	this->widthHiddenLayers = newNeural.widthHiddenLayers;
 	this->OutputNeuronsCount = newNeural.OutputNeuronsCount;
+	this->HiddenNeuronCount = newNeural.HiddenNeuronCount;
 
 	this->EnterNeurons.reserve(EnterNeuronsCount);
 	this->HiddenLayers.reserve(widthHiddenLayers);

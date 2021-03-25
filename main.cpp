@@ -14,7 +14,7 @@ int main()
 	circles.reserve(Globals::circlesCount);
 	for (int i = 0; i < Globals::circlesCount; ++i)
 	{
-		circles.push_back(Circle(get_rand_float() * 15.f, 15.f, 1.f, 20.f));
+		circles.push_back(Circle(25.f, 25.f, 1.f, 20.f));
 	}
 	sf::RenderWindow window(sf::VideoMode(Globals::widthWindow, Globals::heightWindow), "SFML works!");
 	window.setFramerateLimit(60);

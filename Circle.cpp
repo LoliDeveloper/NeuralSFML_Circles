@@ -65,35 +65,40 @@ void Circle::Update()
 
 void Circle::Die()
 {
-	//static double minError = 1000;
-	//if (abs(fmodf(Angle, 2 * M_PI)) <= 1 && Shape.getPosition().y > Globals::heightWindow - 2 * Radius)
-	//{
-	//	if (MindShape.getError(0) < minError)
-	//	{
-	//		minError = MindShape.getError(0);
-	//		std::cout << "Minimum Error = " << minError << std::endl;
-	//	}
-	//}
+	static double minError = 1000;
+	static NeuralMind Etalon;
+	if (abs(fmodf(Angle, 2 * M_PI)) <= M_PI/2. && Shape.getPosition().y > Globals::heightWindow - 2 * Radius)
+	{
+		if (MindShape.getError(0) < minError)
+		{
+			Etalon = MindShape;
+			minError = MindShape.getError(0);
+			std::cout << "Minimum Error = " << minError << std::endl;
+		}
+	}
+	else if (abs(fmodf(Angle, 2 * M_PI)) <= 1)
+	{
+
+	}
 	auto end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = end - start;
 
-	int stop = (int)(get_rand_double() * 100 * (1. / elapsed_seconds.count()));
+	int stop = (int)(get_rand_double() * 1500 * (1. / elapsed_seconds.count()));
 	if (elapsed_seconds.count() > 3.)
 	{
-		//std::cout << "elapsed_seconds.count() = " << elapsed_seconds.count() << "\t stop = " << stop << std::endl;
-		//std::cout << "HiddenWidth = " << MindShape.widthHiddenLayers << "\tHiddenCount = " << MindShape.HiddenCount <<std::endl;
-		for (int i = 0; i < stop; ++i)
-		{
-			MindShape.RandomMutation();
-		}
-	}
-	else 
+		std::cout << "elapsed_seconds.count() = " << elapsed_seconds.count() << "\t stop = " << stop << std::endl;
+		std::cout << "HiddenWidth = " << MindShape.widthHiddenLayers << "\tHiddenCount = " << MindShape.HiddenNeuronCount <<std::endl;
+		
+	}else
 	{
-		MindShape = NeuralMind(4, static_cast<int>(10 * get_rand_float()) + 1, static_cast <int>(15 * get_rand_float() + 1), 4);
+		MindShape = Etalon;
 	}
-	
+	for (int i = 0; i < stop; ++i)
+	{
+		MindShape.RandomMutation();
+	}
 	set_random_position();
-	Speed = 1.f;
+	Speed = 20.f;
 	RecalculateDirection();
 	start = std::chrono::system_clock::now();
 }

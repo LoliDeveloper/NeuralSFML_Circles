@@ -18,6 +18,7 @@ public:
 	int EnterNeuronsCount;
 	int widthHiddenLayers;
 	int OutputNeuronsCount;
+	int HiddenNeuronCount;
 
 private:
 	std::vector<EnterNeuron> EnterNeurons;
