@@ -65,24 +65,24 @@ void Circle::Update()
 
 void Circle::Die()
 {
-	static double minError = 1000;
-	if (abs(fmodf(Angle, 2 * M_PI)) <= 1 && Shape.getPosition().y > Globals::heightWindow - 2 * Radius)
-	{
-		if (MindShape.getError(0) < minError)
-		{
-			minError = MindShape.getError(0);
-			std::cout << "Minimum Error = " << minError << std::endl;
-		}
-	}
+	//static double minError = 1000;
+	//if (abs(fmodf(Angle, 2 * M_PI)) <= 1 && Shape.getPosition().y > Globals::heightWindow - 2 * Radius)
+	//{
+	//	if (MindShape.getError(0) < minError)
+	//	{
+	//		minError = MindShape.getError(0);
+	//		std::cout << "Minimum Error = " << minError << std::endl;
+	//	}
+	//}
 	auto end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = end - start;
 
 	int stop = (int)(get_rand_double() * 100 * (1. / elapsed_seconds.count()));
 	if (elapsed_seconds.count() > 3.)
 	{
-		std::cout << "elapsed_seconds.count() = " << elapsed_seconds.count() << "\t stop = " << stop << std::endl;
-		std::cout << "HiddenWidth = " << MindShape.widthHiddenLayers << "\tHiddenCount = " << MindShape.HiddenCount <<std::endl;
-		for (size_t i = 0; i < stop; ++i)
+		//std::cout << "elapsed_seconds.count() = " << elapsed_seconds.count() << "\t stop = " << stop << std::endl;
+		//std::cout << "HiddenWidth = " << MindShape.widthHiddenLayers << "\tHiddenCount = " << MindShape.HiddenCount <<std::endl;
+		for (int i = 0; i < stop; ++i)
 		{
 			MindShape.RandomMutation();
 		}

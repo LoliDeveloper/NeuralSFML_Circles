@@ -1,6 +1,6 @@
 #pragma once
 
-static class Globals
+class Globals
 {
 public:
 	static const int widthWindow = 500;

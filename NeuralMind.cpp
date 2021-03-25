@@ -9,8 +9,7 @@
 NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int outputNeuronsCount):
 	EnterNeuronsCount(enterNeurons),
 	widthHiddenLayers(hiddenWidth),
-	OutputNeuronsCount(outputNeuronsCount),
-	HiddenCount(hiddenCount)
+	OutputNeuronsCount(outputNeuronsCount)
 {
 	EnterNeurons.reserve(EnterNeuronsCount);
 	HiddenLayers.reserve(widthHiddenLayers);
@@ -39,6 +38,8 @@ NeuralMind::NeuralMind(int enterNeurons, int hiddenWidth, int hiddenCount, int o
 	}
 
 }
+
+NeuralMind::NeuralMind() : NeuralMind(4, 4, 4, 4) {};
 
 NeuralMind::~NeuralMind()
 {

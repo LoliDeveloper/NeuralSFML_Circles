@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "NeuralMind.h"
 #include "MyFunctions.h"
 #include <chrono>
+#include "NeuralMind.h"
 
 class Circle
 {
@@ -13,7 +13,8 @@ public:
 	void Update();
 	void set_random_position();
 	~Circle();
-	sf::CircleShape Shape;
+	sf::CircleShape Shape;	
+	NeuralMind MindShape;// = NeuralMind(4, static_cast<int>(10 * get_rand_float()) + 1, static_cast <int>(10 * get_rand_float() + 1), 4);
 
 private:
 	sf::Vector2f Direction;
@@ -28,5 +29,4 @@ private:
 	void increaseSpeed();
 	void decreaseSpeed();
 	void RecalculateDirection();
-	NeuralMind MindShape = NeuralMind(4, static_cast<int>(10 * get_rand_float()) + 1, static_cast <int>(10 * get_rand_float() + 1), 4);
 };
