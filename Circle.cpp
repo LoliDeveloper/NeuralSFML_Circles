@@ -69,10 +69,10 @@ void Circle::Die()
 	static NeuralMind Etalon;
 	if (abs(fmodf(Angle, 2 * M_PI)) <= M_PI/2. && Shape.getPosition().y > Globals::heightWindow - 2 * Radius)
 	{
-		if (MindShape.getError(0) < minError)
+		if (MindShape.getError(3) <= minError)
 		{
 			Etalon = MindShape;
-			minError = MindShape.getError(0);
+			minError = MindShape.getError(3);
 			std::cout << "Minimum Error = " << minError << std::endl;
 		}
 	}
@@ -91,12 +91,16 @@ void Circle::Die()
 		
 	}else
 	{
-		MindShape = Etalon;
+		MindShape = Etalon; 
+		for (int i = 0; i < 73; ++i)
+		{
+			MindShape.RandomMutation();
+		}
 	}
-	for (int i = 0; i < stop; ++i)
+	/*for (int i = 0; i < stop; ++i)
 	{
 		MindShape.RandomMutation();
-	}
+	}*/
 	set_random_position();
 	Speed = 20.f;
 	RecalculateDirection();
@@ -105,7 +109,7 @@ void Circle::Die()
 
 void Circle::set_random_position()
 {
-	int tmp = get_rand_double(4);
+	int tmp = 0;// get_rand_double(4);
 	if (tmp == 0)
 	{
 		Shape.setPosition(0, 0);
